@@ -1,0 +1,16 @@
+#movie {
+  position: relative;
+}
+#movie > #MainImg {
+  display: inline-flex;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
+  border-radius: 1rem;
+}
+#movie > h2, #movie > h2 > a{
+  display: inline-flex;
+  position: relative;
+  margin: 0px 5px;
+}
+p {
+  display: inline-flex;
+}
