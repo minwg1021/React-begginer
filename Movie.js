@@ -1,32 +1,24 @@
-import React, { useState, useEffect } from "react";
+import propTypes from "prop-types";
+import { Link } from "react-router-dom";
+import "../css/Movie.css";
 
-function App() {
-  const [loading, setLoading] = useState(true);
-  const [movies, setMovies] = useState([]);
-  const getMovies = async () => {
-    const json = await (
-      await fetch(
-        `https://yts.mx/api/v2/list_movies.json?minimum_rating=8.8&sort_by=year`
-      )
-    ).json();
-    setMovies(json.data.movies);
-    setLoading(false);
-  }
-  useEffect(()=>{
-    getMovies();
-  },[]);
-  
+function Movie({id, coverImage, title, year, summary }) {
   return(
-  <div>
-    {loading ? <h1>Loading...</h1>: movies.map((movie) => 
-    <div>
-      <h2>{movie.title}</h2>
-      <img src={movie.medium_cover_image}/>
-      <p>{`Rate: ${movie.rating} / Summary: ${movie.summary}`}</p>
+    <div id="movie">
+      <img id="MainImg" src={coverImage} alt={title}/>
+      <h2><Link to={`/movie/${id}`}>{title}</Link></h2>
+      <p>{year}</p>
+      <p>{summary}</p>
     </div>
-    )}
-  </div>
   )
 }
 
-export default App;
+Movie.propTypes = {
+  id: propTypes.number.isRequired,
+  coverImage: propTypes.string.isRequired,
+  title: propTypes.string.isRequired,
+  summary: propTypes.string.isRequired,
+  year: propTypes.number.isRequired
+};
+
+export default Movie;
